@@ -1,0 +1,62 @@
+﻿{
+  "childEdges" : [
+    {
+      "name": "A1",
+      "payoff": [
+        0,
+        0
+      ],
+      "childNode": {
+        "name": "2nd",
+        "type": "decision",
+
+        "childEdges": [
+          {
+            "name": "B1",
+            "payoff": [
+              0,
+              0
+            ],
+            "childNode": {
+              "name": "3rd",
+              "type": "decision",
+              "childEdges": [
+                {
+                  "name": "C1",
+                  "payoff": [
+                    0,
+                    0
+                  ],
+                  "childNode": { "type": "terminal" }
+                },
+                {
+                  "name": "C2",
+                  "payoff": [
+                    0,
+                    0
+                  ],
+                  "childNode": { "type": "terminal" }
+                }
+              ]
+            }
+          },
+          {
+            "name": "B2",
+            "payoff": [
+              0,
+              0
+            ],
+            "childNode": { "type": "terminal"  }
+          }
+        ]
+      }
+
+      //edge = childEdges
+
+    }
+
+  ],
+
+  "name": "start",
+  "type": "decision"
+}
