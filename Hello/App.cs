@@ -22,19 +22,55 @@ namespace Default
             //t.ChildEdges = temp;
             t.Root.ChildEdges = temp;
 
-            t.Travers(t.Root);
+            t.Travers(t.Root); Console.WriteLine(@"");
+            GetDecisionSiblingNode(t.Root);
 
-            //var n = temp.FirstOrDefault().GetNodeDescendants();
 
-            Console.WriteLine();
-            RecursiveDepthFirstSearch(new Node() {  ChildEdges = temp }, "R") ;
+            //var m = t.Root.GetNodeDescendants();
+
+            string[] parent = new string[10000];
+
+            Console.WriteLine("----------------------------- \n*R");
+            var node = RecursiveGetParent(t.Root, "R", parent, 0);
+            //Console.WriteLine(node.Name + " -> R" );
 
             //QueueTraverse(new Node() { ChildEdges = temp });
 
-           // string json = JsonConvert.SerializeObject(t);
+            // string json = JsonConvert.SerializeObject(t);
 
             // Console.WriteLine(json);
             //Console.ReadLine();
+
+
+        }
+
+
+        static void GetDecisionSiblingNode(Node parent)
+        {
+            if (parent.ChildEdges == null)
+            {
+
+            }
+            else
+            {
+                if (parent.ChildNode == null) parent.ChildNode = new Node();
+
+                {
+                    // ParentN.Add(parent.Name, parent.Path);
+                    foreach (Node n in parent.ChildEdges)
+                    {
+                        if (parent.ChildNode.Type == "chance")
+                        {
+                            Console.WriteLine("--------------------------------------");
+                            Console.WriteLine("#" + parent.Name); 
+                            new Tree().Travers(n);
+                        }
+
+                        GetDecisionSiblingNode(n);
+                    }
+                }
+            }
+
         }
 
         /*public static void QueueTraverse(Node root)
@@ -88,7 +124,7 @@ namespace Default
 
             foreach (var child in rootNode.ChildEdges)
             {
-                Console.Write(child.Name + " -> ");
+                Console.Write(child.Name + " ");
                 var n = RecursiveDepthFirstSearch(child, stringToFind);
                 if (n != null)
                 {
@@ -99,6 +135,47 @@ namespace Default
             return null;
         }
 
+
+        private static string[] RecursiveGetParent(Node root, string name, string[] parent, int len)
+        {
+            //List<string> parents = new string[1000];
+            // Node temp = null;
+            if (root.Name == name) return parent;
+
+            else
+            {
+
+                if (root.ChildEdges == null)
+                {
+                    return parent;
+                }
+                else
+                {
+
+                    foreach (Node n in root.ChildEdges)
+                    {
+                        if (n.Name == name)
+                        {
+                            Console.Write(root.Name + " , ");
+                          
+                            //carry
+                            parent[len] = root.Name;
+                            len++;
+                        
+                           
+                        }
+                        else
+                        {
+                             RecursiveGetParent(n, name, parent, len++);
+                        }
+
+                    }
+
+                    return parent;
+                }
+
+            }
+        }
 
 
         private static Node RecursiveEdgeToNode(Node n)
@@ -123,8 +200,6 @@ namespace Default
             }
 
             return temp;
-
-
         }
 
         private static List<Node> RecursiveEdgeToNode(List<Node> n)
@@ -141,5 +216,6 @@ namespace Default
 
         }
 
+   
     }
 }

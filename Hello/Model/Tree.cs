@@ -55,6 +55,7 @@ namespace Default.Model
 
                 foreach(Node n in node.ChildEdges)
                 {
+                    
                     TraverseRecursive(n, path, length);
                 }
 
@@ -75,6 +76,8 @@ namespace Default.Model
             }
             Console.WriteLine("()");
         }
+
+
 
     }
 }

@@ -25,8 +25,13 @@ namespace Default.Model
 
         public IEnumerable<Node> GetNodeDescendants() // Note that this method is lazy
         {
+            if (ChildEdges == null) return null;
+
             return new[] { this }
                    .Concat(ChildEdges.SelectMany(child => child.GetNodeDescendants()));
         }
+
+
+
     }
 }
